@@ -10,11 +10,19 @@ import scalariform.parser.ScalaParserException
 import scalariform.ScalaVersions
 import scalariform.Utils._
 
-object Main {
+object Main extends xsbti.AppMain {
 
   def main(args: Array[String]) {
-    sys.exit(if (process(args)) 1 else 0)
+    sys.exit(toCode(process(args)))
   }
+
+  /** The launched conscript entry point */
+  def run(config: xsbti.AppConfiguration): Exit =
+    new Exit(toCode(process(config.arguments)))
+
+  def toCode(b: Boolean) = if (b) 1 else 0
+
+  class Exit(val code: Int) extends xsbti.Exit
 
   def process(args: Array[String]): Boolean = {
 

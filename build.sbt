@@ -106,7 +106,7 @@ lazy val scalariform = (project
 )
 
 lazy val cli = (project
-  enablePlugins(BuildInfoPlugin)
+  enablePlugins(BuildInfoPlugin, ConscriptPlugin)
   settings(subprojectSettings)
   settings(publishSettings("cli"))
   settings(
